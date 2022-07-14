@@ -2,7 +2,13 @@ package com.example.loginko.login.presenter
 
 import com.example.loginko.login.model.LoginInteractorL
 import com.example.loginko.login.model.LoginInterceptor
+import com.example.loginko.login.request.LoginRequets
+import com.example.loginko.login.response.LoginResponse
 import com.example.loginko.login.view.LoginViewInterface
+import com.example.loginko.service.WebServices
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginPresenterL(
@@ -17,6 +23,7 @@ class LoginPresenterL(
 
         mLoginInteractorL.login(email, username,this)
     }
+
 
     override fun onUsernameError() {
         mLogingView.setUserNameError()

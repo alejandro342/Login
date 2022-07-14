@@ -40,40 +40,9 @@ class LoginActivity : AppCompatActivity() , LoginViewInterface, View.OnClickList
     }
 
     override fun onClick(p0: View?) {
-       if (TextUtils.isEmpty(binding.textUser.text.toString()) || TextUtils.isEmpty(binding.textPassword.text.toString())){
-           setUserNameError()
-           setPasswordError()
-       }else{
-           loginU()
-       }
+      mPresenter.validateUsers(binding.textUser.text.toString(), binding.textPassword.text.toString())
     }
 
-    fun loginU(){
-        val loginrequets = LoginRequets()
-        loginrequets.email.toString()
-        loginrequets.username.toString()
-
-        val loginResponseCall: Call<LoginResponse> = WebServices.getUsers.loginUsers(loginrequets)
-        loginResponseCall.enqueue(object : Callback<LoginResponse?> {
-            override fun onResponse(
-                call: Call<LoginResponse?>,
-                response: Response<LoginResponse?>
-            ) {
-                if (response.isSuccessful){
-                    showProgress()
-                    goHome()
-                }
-                else{
-                    setUserNameError()
-                    setPasswordError()
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-    }
     override fun showProgress() {
         binding.progressBar.setVisibility(View.VISIBLE)
         binding.button.setVisibility(View.GONE)
